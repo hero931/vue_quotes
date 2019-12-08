@@ -1,7 +1,17 @@
 <template>
   <div class="container">
     <app-new-quote @quoteAdded="NewQuote"></app-new-quote>
-    <app-quote-grid :quotes="myQuotes"></app-quote-grid>
+    <app-quote-grid
+      :quotes="myQuotes"
+      @quoteDeleted="delQuote"
+    ></app-quote-grid>
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <div class="alert alert-info">
+          <p>Click here to delete a quote</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -11,7 +21,7 @@ import NewQuote from "./components/NewQuote.vue";
 export default {
   data: function() {
     return {
-      myQuotes: ["here testing my quote"],
+      myQuotes: [],
       maxQuotes: 10
     };
   },
@@ -22,6 +32,9 @@ export default {
   methods: {
     NewQuote(quote) {
       this.myQuotes.push(quote);
+    },
+    delQuote(index) {
+      this.myQuotes.splice(index, 1);
     }
   }
 };
